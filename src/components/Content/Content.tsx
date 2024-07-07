@@ -25,7 +25,7 @@ class Content extends React.Component<ContentProps> {
           {this.props.pokemons.map((pokemon: Pokemon) => (
             <Card
               key={pokemon.name}
-              imgPath={pokemon.sprites.front_default}
+              imgPath={pokemon.sprites.other['official-artwork'].front_default}
               name={pokemon.name}
               weight={pokemon.weight}
               height={pokemon.height}

@@ -4,6 +4,11 @@ export interface Pokemon {
   weight: number;
   sprites: {
     front_default: string;
+    other: {
+      'official-artwork': {
+        front_default: string;
+      };
+    };
   };
   stats: StatItem[];
 }
