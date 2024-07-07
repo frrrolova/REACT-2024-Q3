@@ -7,7 +7,7 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
 type ComponentState = {
   pokemons: Pokemon[];
-  isSearchDisabled: boolean;
+  isLoading: boolean;
   showEmptyRespNotification: boolean;
 };
 
@@ -16,7 +16,7 @@ class App extends React.Component<object, ComponentState> {
     super(props);
     this.state = {
       pokemons: [],
-      isSearchDisabled: false,
+      isLoading: false,
       showEmptyRespNotification: false,
     };
   }
@@ -26,16 +26,16 @@ class App extends React.Component<object, ComponentState> {
   }
 
   private async getPokemons(searchString: string = ''): Promise<void> {
-    this.setState((state) => ({ ...state, isSearchDisabled: true, showEmptyRespNotification: false }));
+    this.setState((state) => ({ ...state, isLoading: true, showEmptyRespNotification: false }));
     try {
       const pokemons = await getPokemons(searchString);
 
       this.setState((state) => {
-        return { ...state, pokemons, isSearchDisabled: false, showEmptyRespNotification: !pokemons.length };
+        return { ...state, pokemons, isLoading: false, showEmptyRespNotification: !pokemons.length };
       });
     } catch (e) {
       this.setState((state) => {
-        return { ...state, pokemons: [], showEmptyRespNotification: true, isSearchDisabled: false };
+        return { ...state, pokemons: [], showEmptyRespNotification: true, isLoading: false };
       });
     }
   }
@@ -44,12 +44,16 @@ class App extends React.Component<object, ComponentState> {
     return (
       <ErrorBoundary>
         <Header
-          isSearchDisabled={this.state.isSearchDisabled}
+          isSearchDisabled={this.state.isLoading}
           onSearch={(searchString) => {
             this.getPokemons(searchString);
           }}
         />
-        <Content showEmptyRespNotification={this.state.showEmptyRespNotification} pokemons={this.state.pokemons} />
+        <Content
+          showEmptyRespNotification={this.state.showEmptyRespNotification}
+          pokemons={this.state.pokemons}
+          isLoading={this.state.isLoading}
+        />
       </ErrorBoundary>
     );
   }
