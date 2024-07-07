@@ -7,16 +7,35 @@ interface HeaderProps {
   isSearchDisabled: boolean;
 }
 
-class Header extends React.Component<HeaderProps> {
+interface HeaderState {
+  isErrClicked: boolean;
+}
+
+class Header extends React.Component<HeaderProps, HeaderState> {
   constructor(props: HeaderProps) {
     super(props);
+    this.state = {
+      isErrClicked: false,
+    };
   }
 
   render(): React.ReactNode {
+    if (this.state.isErrClicked) {
+      throw new Error('App Crashed');
+    }
     return (
       <header className={styles.header}>
         <div>TITLE</div>
         <SearchInput isSearchDisabled={this.props.isSearchDisabled} onSearchClick={this.props.onSearch} />
+        <div>
+          <button
+            onClick={() => {
+              this.setState((state) => ({ ...state, isErrClicked: true }));
+            }}
+          >
+            Show Error
+          </button>
+        </div>
       </header>
     );
   }

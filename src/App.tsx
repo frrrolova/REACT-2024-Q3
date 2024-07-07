@@ -3,6 +3,7 @@ import { getPokemons } from './services/pokemon.service';
 import { Pokemon } from './types';
 import Header from './components/Header/Header';
 import Content from './components/Content/Content';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
 type ComponentState = {
   pokemons: Pokemon[];
@@ -41,7 +42,7 @@ class App extends React.Component<object, ComponentState> {
 
   render(): React.ReactNode {
     return (
-      <>
+      <ErrorBoundary>
         <Header
           isSearchDisabled={this.state.isSearchDisabled}
           onSearch={(searchString) => {
@@ -49,7 +50,7 @@ class App extends React.Component<object, ComponentState> {
           }}
         />
         <Content showEmptyRespNotification={this.state.showEmptyRespNotification} pokemons={this.state.pokemons} />
-      </>
+      </ErrorBoundary>
     );
   }
 }
