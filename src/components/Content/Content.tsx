@@ -1,6 +1,8 @@
 import React from 'react';
 import { Pokemon } from '@/types';
-// import styles from './Content.module.scss';
+import Card from '../Card/Card';
+import styles from './Content.module.scss';
+import ballImg from '/img/pokeball.webp';
 
 interface ContentProps {
   showEmptyRespNotification: boolean;
@@ -15,11 +17,20 @@ class Content extends React.Component<ContentProps> {
   render(): React.ReactNode {
     return (
       <div>
-        <h1>Results</h1>
-        <ul>
+        <h1 className={styles.title}>
+          Results <img className={styles.titleImg} src={ballImg} alt="ball" />
+        </h1>
+        <ul className={styles.list}>
           {this.props.showEmptyRespNotification && <div>No results</div>}
           {this.props.pokemons.map((pokemon: Pokemon) => (
-            <div key={pokemon.name}>{pokemon.name}</div>
+            <Card
+              key={pokemon.name}
+              imgPath={pokemon.sprites.front_default}
+              name={pokemon.name}
+              weight={pokemon.weight}
+              height={pokemon.height}
+              stats={pokemon.stats}
+            />
           ))}
         </ul>
       </div>

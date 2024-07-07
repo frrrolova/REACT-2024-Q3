@@ -8,10 +8,16 @@ html {
 * {
   box-sizing: border-box;
 }
-
 body {
-  margin: 0;
   background-color: $background-color;
+}
+
+body,
+ul,
+li,
+p {
+  margin: 0;
+  padding: 0;
 }
 
 #root {

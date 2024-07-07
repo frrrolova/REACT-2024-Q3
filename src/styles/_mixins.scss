@@ -1,6 +1,17 @@
-@mixin header-btn {
+@mixin header-item {
   height: $header-btn-height;
   border-radius: 7px;
   border: 1px solid $btn-grey;
   font-size: 1rem;
+}
+
+@mixin header-btn {
+  cursor: pointer;
+  background-color: $btn-color;
+  color: $btn-grey;
+  transition: background-color 0.2s ease-out;
+}
+
+@mixin header-btn-hover {
+  background-color: lighten($color: $btn-color, $amount: 10%);
 }

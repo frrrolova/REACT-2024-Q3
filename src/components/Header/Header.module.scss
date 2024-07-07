@@ -27,8 +27,10 @@
 }
 
 .err-btn {
+  @include header-item;
   @include header-btn;
-  cursor: pointer;
-  background-color: $btn-color;
-  color: $btn-grey;
+
+  &:hover {
+    @include header-btn-hover;
+  }
 }

@@ -2,7 +2,7 @@
 @import '@/styles/mixins.scss';
 
 .search {
-  @include header-btn;
+  @include header-item;
   overflow: hidden;
 }
 
@@ -19,8 +19,10 @@
   height: 100%;
   border: none;
   border-left: 1px solid gray;
-  background-color: $btn-color;
-  color: $btn-grey;
+  @include header-btn;
   font-size: 1rem;
-  cursor: pointer;
+
+  &:hover {
+    @include header-btn-hover;
+  }
 }

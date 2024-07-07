@@ -1,0 +1,62 @@
+@import '@/styles/variables.scss';
+
+.card {
+  box-sizing: border-box;
+  width: 250px;
+  border-radius: 10px;
+  border: 2px solid $card-border;
+  border-style: outset;
+  background-color: $card-back;
+  transition: background-color 0.2s ease-out;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #ffffff;
+    & img {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.card-content {
+  padding: 5px 20px 20px;
+  color: $card-text;
+}
+
+.title {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: $card-title;
+}
+
+.subtitle {
+  margin: 12px 0;
+  font-size: 1.2rem;
+}
+
+.card-attribute {
+  margin: 8px 0;
+}
+
+.attribute-name {
+  margin-right: 8px;
+  text-transform: capitalize;
+}
+
+.card-stat {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dotted $card-border;
+}
+
+.img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+
+  & > img {
+    width: 100%;
+    transition: transform 0.2s ease-out;
+  }
+}
