@@ -1,10 +1,11 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import { getPokemons } from './services/pokemon.service';
 import { Pokemon } from './types';
+import Header from './components/Header/Header';
+import Content from './components/Content/Content';
 
 type ComponentState = {
   pokemons: Pokemon[];
-  searchString: string;
   isSearchDisabled: boolean;
   showEmptyRespNotification: boolean;
 };
@@ -14,25 +15,19 @@ class App extends React.Component<object, ComponentState> {
     super(props);
     this.state = {
       pokemons: [],
-      searchString: localStorage.getItem('searchString') ?? '',
       isSearchDisabled: false,
       showEmptyRespNotification: false,
     };
   }
 
   async componentDidMount(): Promise<void> {
-    await this.getPokemons();
+    await this.getPokemons(localStorage.getItem('searchString') ?? '');
   }
 
-  private async onSearchClick(): Promise<void> {
-    localStorage.setItem('searchString', this.state.searchString);
-    await this.getPokemons();
-  }
-
-  private async getPokemons(): Promise<void> {
+  private async getPokemons(searchString: string = ''): Promise<void> {
     this.setState((state) => ({ ...state, isSearchDisabled: true, showEmptyRespNotification: false }));
     try {
-      const pokemons = await getPokemons(this.state.searchString);
+      const pokemons = await getPokemons(searchString);
 
       this.setState((state) => {
         return { ...state, pokemons, isSearchDisabled: false, showEmptyRespNotification: !pokemons.length };
@@ -47,28 +42,13 @@ class App extends React.Component<object, ComponentState> {
   render(): React.ReactNode {
     return (
       <>
-        <h2>Vite + React</h2>
-        <div>
-          <input
-            defaultValue={this.state.searchString}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => {
-              this.setState((state) => ({ ...state, searchString: event.target.value }));
-            }}
-            type="search"
-          />
-          <button disabled={this.state.isSearchDisabled} onClick={this.onSearchClick} type="button">
-            Search
-          </button>
-        </div>
-        <div>
-          <h1>results</h1>
-          <ul>
-            {this.state.showEmptyRespNotification && <div>No results</div>}
-            {this.state.pokemons.map((pokemon: Pokemon) => (
-              <div key={pokemon.name}>{pokemon.name}</div>
-            ))}
-          </ul>
-        </div>
+        <Header
+          isSearchDisabled={this.state.isSearchDisabled}
+          onSearch={(searchString) => {
+            this.getPokemons(searchString);
+          }}
+        />
+        <Content showEmptyRespNotification={this.state.showEmptyRespNotification} pokemons={this.state.pokemons} />
       </>
     );
   }
