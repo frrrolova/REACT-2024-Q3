@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchInput from '../SearchInput/SearchInput';
+import logoImg from '/img/pokemon-logo.webp';
 import styles from './Header.module.scss';
 
 interface HeaderProps {
@@ -25,10 +26,13 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     }
     return (
       <header className={styles.header}>
-        <div>TITLE</div>
+        <div className={styles.logo}>
+          <img src={logoImg} alt="logo" />
+        </div>
         <SearchInput isSearchDisabled={this.props.isSearchDisabled} onSearchClick={this.props.onSearch} />
         <div>
           <button
+            className={styles.errBtn}
             onClick={() => {
               this.setState((state) => ({ ...state, isErrClicked: true }));
             }}

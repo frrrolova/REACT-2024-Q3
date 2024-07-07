@@ -23,8 +23,14 @@ class SearchInput extends React.Component<SearchInputProps> {
           this.props.onSearchClick(this.inputRef.current?.value || '');
         }}
       >
-        <input defaultValue={localStorage.getItem('searchString') ?? ''} type="search" ref={this.inputRef} />
-        <button disabled={this.props.isSearchDisabled} type="submit">
+        <input
+          defaultValue={localStorage.getItem('searchString') ?? ''}
+          placeholder="Search pokemon"
+          type="input"
+          ref={this.inputRef}
+          className={styles.input}
+        />
+        <button disabled={this.props.isSearchDisabled} type="submit" className={styles.btn}>
           Search
         </button>
       </form>

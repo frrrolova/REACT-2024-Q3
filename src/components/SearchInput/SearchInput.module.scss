@@ -1,2 +1,26 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+
 .search {
+  @include header-btn;
+  overflow: hidden;
+}
+
+.input {
+  border: none;
+  outline: none;
+  height: 100%;
+  padding: 3px 10px;
+  background-color: $input-back;
+  font-size: 1rem;
+}
+
+.btn {
+  height: 100%;
+  border: none;
+  border-left: 1px solid gray;
+  background-color: $btn-color;
+  color: $btn-grey;
+  font-size: 1rem;
+  cursor: pointer;
 }

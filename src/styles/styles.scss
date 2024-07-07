@@ -1,9 +1,17 @@
+@import '_variables';
+@import 'mixins';
+
 html {
   scroll-behavior: smooth;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  background-color: $background-color;
 }
 
 #root {

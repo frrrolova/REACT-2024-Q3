@@ -1,0 +1,6 @@
+@mixin header-btn {
+  height: $header-btn-height;
+  border-radius: 7px;
+  border: 1px solid $btn-grey;
+  font-size: 1rem;
+}
