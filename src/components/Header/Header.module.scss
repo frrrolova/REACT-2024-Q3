@@ -13,6 +13,7 @@
   padding: 7px 20px;
   box-sizing: border-box;
   background-color: fade-out($background-color, 0.1);
+  z-index: 1;
 
   & ~ div {
     margin-top: calc($header-height + 10px);
