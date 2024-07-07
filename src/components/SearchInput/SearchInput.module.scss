@@ -19,10 +19,10 @@
   height: 100%;
   border: none;
   border-left: 1px solid gray;
-  @include header-btn;
+  @include btn;
   font-size: 1rem;
 
   &:hover {
-    @include header-btn-hover;
+    @include btn-hover;
   }
 }

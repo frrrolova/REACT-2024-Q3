@@ -5,13 +5,13 @@
   font-size: 1rem;
 }
 
-@mixin header-btn {
+@mixin btn {
   cursor: pointer;
   background-color: $btn-color;
   color: $btn-grey;
   transition: background-color 0.2s ease-out;
 }
 
-@mixin header-btn-hover {
+@mixin btn-hover {
   background-color: lighten($color: $btn-color, $amount: 10%);
 }

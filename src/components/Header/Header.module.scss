@@ -29,9 +29,9 @@
 
 .err-btn {
   @include header-item;
-  @include header-btn;
+  @include btn;
 
   &:hover {
-    @include header-btn-hover;
+    @include btn-hover;
   }
 }
