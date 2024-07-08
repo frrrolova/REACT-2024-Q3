@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "prepare": "husky",
     "prettier:check": "npx prettier ./src",
-    "prettier:write": "prettier --write --ignore-unknown"
+    "format:fix": "prettier --write --ignore-unknown"
   },
   "dependencies": {
     "react": "^18.3.1",
@@ -19,7 +19,7 @@
   },
   "lint-staged": {
     "**/*.{ts,tsx, __parallel-1__ }": "npm run lint",
-    "*.{ts,tsx, __parallel-2__ }": "npm run prettier:write"
+    "*.{ts,tsx, __parallel-2__ }": "npm run format:fix"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
