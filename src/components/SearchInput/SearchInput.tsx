@@ -20,7 +20,7 @@ class SearchInput extends React.Component<SearchInputProps> {
         onSubmit={(e) => {
           e.preventDefault();
           localStorage.setItem('searchString', this.inputRef.current?.value || '');
-          this.props.onSearchClick(this.inputRef.current?.value || '');
+          this.props.onSearchClick(this.inputRef.current?.value.toLowerCase() || '');
         }}
       >
         <input
