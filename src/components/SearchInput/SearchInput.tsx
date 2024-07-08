@@ -19,9 +19,12 @@ class SearchInput extends React.Component<SearchInputProps> {
         className={styles.search}
         onSubmit={(e) => {
           e.preventDefault();
-          const currentSearchStr = this.inputRef.current?.value.toLowerCase();
+          const currentSearchStr = this.inputRef.current?.value.toLowerCase().trim();
           localStorage.setItem('searchString', currentSearchStr || '');
           this.props.onSearchClick(currentSearchStr || '');
+          if (!currentSearchStr && this.inputRef.current?.value) {
+            this.inputRef.current.value = '';
+          }
         }}
       >
         <input

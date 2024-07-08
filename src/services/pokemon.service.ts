@@ -12,7 +12,7 @@ export async function getPokemons(searchString?: string): Promise<Pokemon[]> {
   if (searchString) {
     url += `/${searchString}`;
   } else {
-    url += '?limit=20&offset=20';
+    url += '?limit=20&offset=0';
   }
 
   try {
