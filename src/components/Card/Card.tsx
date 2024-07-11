@@ -17,7 +17,7 @@ class Card extends React.Component<CardProps> {
 
   render(): React.ReactNode {
     return (
-      <div className={styles.card}>
+      <li className={styles.card}>
         <div className={styles.img}>
           <img src={this.props.imgPath} alt={this.props.name} />
         </div>
@@ -43,7 +43,7 @@ class Card extends React.Component<CardProps> {
             })}
           </div>
         </div>
-      </div>
+      </li>
     );
   }
 }

@@ -12,6 +12,10 @@ body {
   background-color: $background-color;
 }
 
+li {
+  list-style-type: none;
+}
+
 body,
 ul,
 li,
