@@ -1,0 +1,29 @@
+@import '_variables';
+@import 'mixins';
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  background-color: $background-color;
+}
+
+li {
+  list-style-type: none;
+}
+
+body,
+ul,
+li,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  position: relative;
+}

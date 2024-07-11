@@ -1,0 +1,28 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+
+.search {
+  @include header-item;
+  overflow: hidden;
+}
+
+.input {
+  border: none;
+  outline: none;
+  height: 100%;
+  padding: 3px 10px;
+  background-color: $input-back;
+  font-size: 1rem;
+}
+
+.btn {
+  height: 100%;
+  border: none;
+  border-left: 1px solid gray;
+  @include btn;
+  font-size: 1rem;
+
+  &:hover {
+    @include btn-hover;
+  }
+}
