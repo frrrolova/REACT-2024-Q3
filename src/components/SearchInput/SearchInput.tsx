@@ -1,4 +1,4 @@
-import React, { createRef } from 'react';
+import { useRef } from 'react';
 import styles from './SearchInput.module.scss';
 
 interface SearchInputProps {
@@ -6,40 +6,34 @@ interface SearchInputProps {
   isSearchDisabled: boolean;
 }
 
-class SearchInput extends React.Component<SearchInputProps> {
-  private inputRef = createRef<HTMLInputElement>();
+function SearchInput({ isSearchDisabled, onSearchClick }: SearchInputProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  constructor(props: SearchInputProps) {
-    super(props);
-  }
-
-  render(): React.ReactNode {
-    return (
-      <form
-        className={styles.search}
-        onSubmit={(e) => {
-          e.preventDefault();
-          const currentSearchStr = this.inputRef.current?.value.toLowerCase().trim();
-          localStorage.setItem('searchString', currentSearchStr || '');
-          this.props.onSearchClick(currentSearchStr || '');
-          if (!currentSearchStr && this.inputRef.current?.value) {
-            this.inputRef.current.value = '';
-          }
-        }}
-      >
-        <input
-          defaultValue={localStorage.getItem('searchString') ?? ''}
-          placeholder="Search pokemon"
-          type="input"
-          ref={this.inputRef}
-          className={styles.input}
-        />
-        <button disabled={this.props.isSearchDisabled} type="submit" className={styles.btn}>
-          Search
-        </button>
-      </form>
-    );
-  }
+  return (
+    <form
+      className={styles.search}
+      onSubmit={(e) => {
+        e.preventDefault();
+        const currentSearchStr = inputRef.current?.value.toLowerCase().trim();
+        localStorage.setItem('searchString', currentSearchStr || '');
+        onSearchClick(currentSearchStr || '');
+        if (!currentSearchStr && inputRef.current?.value) {
+          inputRef.current.value = '';
+        }
+      }}
+    >
+      <input
+        defaultValue={localStorage.getItem('searchString') ?? ''}
+        placeholder="Search pokemon"
+        type="input"
+        ref={inputRef}
+        className={styles.input}
+      />
+      <button disabled={isSearchDisabled} type="submit" className={styles.btn}>
+        Search
+      </button>
+    </form>
+  );
 }
 
 export default SearchInput;

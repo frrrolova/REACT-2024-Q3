@@ -1,4 +1,3 @@
-import React from 'react';
 import { Pokemon } from '@/types';
 import Card from '../Card/Card';
 import styles from './Content.module.scss';
@@ -11,36 +10,30 @@ interface ContentProps {
   isLoading: boolean;
 }
 
-class Content extends React.Component<ContentProps> {
-  constructor(props: ContentProps) {
-    super(props);
-  }
-
-  render(): React.ReactNode {
-    return (
-      <div>
-        <h1 className={styles.title}>
-          Results <img className={styles.titleImg} src={ballImg} alt="ball" />
-        </h1>
-        {this.props.isLoading && <img className={styles.loader} src={loader} alt="loader" />}
-        {!this.props.isLoading && (
-          <ul className={styles.list}>
-            {this.props.showEmptyRespNotification && <div>No results</div>}
-            {this.props.pokemons.map((pokemon: Pokemon) => (
-              <Card
-                key={pokemon.name}
-                imgPath={pokemon.sprites.other['official-artwork'].front_default}
-                name={pokemon.name}
-                weight={pokemon.weight}
-                height={pokemon.height}
-                stats={pokemon.stats}
-              />
-            ))}
-          </ul>
-        )}
-      </div>
-    );
-  }
+function Content({ showEmptyRespNotification, pokemons, isLoading }: ContentProps) {
+  return (
+    <div>
+      <h1 className={styles.title}>
+        Results <img className={styles.titleImg} src={ballImg} alt="ball" />
+      </h1>
+      {isLoading && <img className={styles.loader} src={loader} alt="loader" />}
+      {!isLoading && (
+        <ul className={styles.list}>
+          {showEmptyRespNotification && <div>No results</div>}
+          {pokemons.map((pokemon: Pokemon) => (
+            <Card
+              key={pokemon.name}
+              imgPath={pokemon.sprites.other['official-artwork'].front_default}
+              name={pokemon.name}
+              weight={pokemon.weight}
+              height={pokemon.height}
+              stats={pokemon.stats}
+            />
+          ))}
+        </ul>
+      )}
+    </div>
+  );
 }
 
 export default Content;
