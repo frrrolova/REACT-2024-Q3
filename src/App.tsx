@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { getPokemons } from './services/pokemon.service';
-import { Pokemon } from './types';
+import { Characters } from './types';
 import Header from './components/Header/Header';
 import Content from './components/Content/Content';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import SearchInput from './components/SearchInput/SearchInput';
 
 function App() {
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [persons, setPersons] = useState<Characters[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showEmptyRespNotification, setShowEmptyRespNotification] = useState(false);
 
@@ -19,12 +19,12 @@ function App() {
     setIsLoading(true);
     setShowEmptyRespNotification(true);
     try {
-      const pokemons = await getPokemons(searchString);
-      setPokemons(pokemons);
+      const fetchedData = await getPokemons(searchString);
+      setPersons(fetchedData.results);
       setIsLoading(false);
-      setShowEmptyRespNotification(!pokemons.length);
+      setShowEmptyRespNotification(!fetchedData.results.length);
     } catch (e) {
-      setPokemons([]);
+      setPersons([]);
       setIsLoading(false);
       setShowEmptyRespNotification(true);
     }
@@ -40,7 +40,7 @@ function App() {
           }}
         />
       </Header>
-      <Content showEmptyRespNotification={showEmptyRespNotification} pokemons={pokemons} isLoading={isLoading} />
+      <Content showEmptyRespNotification={showEmptyRespNotification} persons={persons} isLoading={isLoading} />
     </ErrorBoundary>
   );
 }

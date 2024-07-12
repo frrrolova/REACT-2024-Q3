@@ -1,4 +1,4 @@
-import { Pokemon } from '@/types';
+import { Characters } from '@/types';
 import Card from '../Card/Card';
 import styles from './Content.module.scss';
 import ballImg from '/img/pokeball.webp';
@@ -6,11 +6,11 @@ import loader from '/img/poke-loader.png';
 
 interface ContentProps {
   showEmptyRespNotification: boolean;
-  pokemons: Pokemon[];
+  persons: Characters[];
   isLoading: boolean;
 }
 
-function Content({ showEmptyRespNotification, pokemons, isLoading }: ContentProps) {
+function Content({ showEmptyRespNotification, persons, isLoading }: ContentProps) {
   return (
     <div>
       <h1 className={styles.title}>
@@ -20,16 +20,11 @@ function Content({ showEmptyRespNotification, pokemons, isLoading }: ContentProp
       {!isLoading && (
         <ul className={styles.list}>
           {showEmptyRespNotification && <div>No results</div>}
-          {pokemons.map((pokemon: Pokemon) => (
-            <Card
-              key={pokemon.name}
-              imgPath={pokemon.sprites.other['official-artwork'].front_default}
-              name={pokemon.name}
-              weight={pokemon.weight}
-              height={pokemon.height}
-              stats={pokemon.stats}
-            />
-          ))}
+          {persons.map((person: Characters) => {
+            if (person.name) {
+              return <Card key={`${person.id}`} person={person} />;
+            }
+          })}
         </ul>
       )}
     </div>

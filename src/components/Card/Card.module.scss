@@ -2,10 +2,11 @@
 
 .card {
   box-sizing: border-box;
-  width: 250px;
+  width: $card-width;
   border-radius: 10px;
   border: 2px solid $card-border;
   border-style: outset;
+  padding: 2px;
   background-color: $card-back;
   transition: background-color 0.2s ease-out;
   cursor: pointer;
@@ -13,7 +14,7 @@
   &:hover {
     background-color: #ffffff;
     & img {
-      transform: scale(1.05);
+      transform: scale(1.03);
     }
   }
 }
@@ -53,10 +54,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2px;
+  max-width: $card-width;
+  border-radius: 8px;
+  overflow: hidden;
 
   & > img {
     width: 100%;
+    border-radius: 8px;
     transition: transform 0.2s ease-out;
   }
 }
