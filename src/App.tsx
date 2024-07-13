@@ -18,16 +18,18 @@ function App() {
   const fetchPokemons = async (searchString: string = ''): Promise<void> => {
     setIsLoading(true);
     setShowEmptyRespNotification(true);
-    try {
-      const fetchedData = await getPokemons(searchString);
-      setPersons(fetchedData.results);
-      setIsLoading(false);
-      setShowEmptyRespNotification(!fetchedData.results.length);
-    } catch (e) {
-      setPersons([]);
-      setIsLoading(false);
-      setShowEmptyRespNotification(true);
-    }
+    getPokemons(searchString)
+      .then((fetchedData) => {
+        setPersons(fetchedData.results);
+        setShowEmptyRespNotification(!fetchedData.results.length);
+      })
+      .catch(() => {
+        setPersons([]);
+        setShowEmptyRespNotification(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import logoImg from '/img/pokemon-logo.webp';
+import logoImg from '/img/logo.webp';
 import styles from './Header.module.scss';
 
 interface HeaderProps {
