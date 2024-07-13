@@ -3,17 +3,28 @@ import styles from './Details.module.scss';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { Character } from '@/types';
+import loader from '/img/details-loader.webp';
 
 function Details() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [person, setPerson] = useState<Character | null>(null);
+  const [isLoading, setIsloading] = useState(false);
+  const [isFetchErr, setIsFetchErr] = useState(false);
 
   const detailsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetchSingleCharacter()?.then((resp) => {
-      setPerson(resp);
-    });
+    setIsloading(true);
+    fetchSingleCharacter()
+      ?.then((resp) => {
+        setPerson(resp);
+      })
+      .catch(() => {
+        setIsFetchErr(true);
+      })
+      .finally(() => {
+        setIsloading(false);
+      });
   }, []);
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -56,6 +67,18 @@ function Details() {
           <polygon points="456.851,0 245,212.564 33.149,0 0.708,32.337 212.669,245.004 0.708,457.678 33.149,490 245,277.443 456.851,490 489.292,457.678 277.331,245.004 489.292,32.337 " />
         </svg>
       </button>
+
+      {isLoading && (
+        <div className={styles.helperWrapper}>
+          <img className={styles.loader} src={loader} alt="loader" />
+        </div>
+      )}
+
+      {isFetchErr && (
+        <div className={styles.helperWrapper}>
+          <div>Failed to fetch.</div>
+        </div>
+      )}
 
       {person && (
         <div>

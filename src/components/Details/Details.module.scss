@@ -90,3 +90,28 @@
     right: 0;
   }
 }
+
+.helper-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+  opacity: 0.8;
+}
+
+.loader {
+  animation: loader 0.8s linear infinite;
+  transform: rotate(0) scale(1);
+  margin: 0 auto;
+  width: 100px;
+  display: block;
+  margin-top: 125px;
+}
+
+@keyframes loader {
+  50% {
+    transform: scale(0.6);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+  }
+}
