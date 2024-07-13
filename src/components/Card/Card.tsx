@@ -3,12 +3,18 @@ import { Characters } from '@/types';
 
 interface CardProps {
   person: Characters;
+  onCardClick: (card: number) => void;
 }
 
-function Card({ person }: CardProps) {
+function Card({ person, onCardClick }: CardProps) {
   const { name, image, species, gender, type, status } = person;
   return (
-    <li className={styles.card}>
+    <li
+      className={styles.card}
+      onClick={() => {
+        onCardClick(person.id);
+      }}
+    >
       <div className={styles.img}>
         <img src={image} alt={name} />
       </div>

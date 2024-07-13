@@ -6,6 +6,8 @@
   border-radius: 10px;
   border: 2px solid $card-border;
   border-style: outset;
+  min-height: 520px;
+  max-height: 520px;
   padding: 2px;
   background-color: $card-back;
   transition: background-color 0.2s ease-out;

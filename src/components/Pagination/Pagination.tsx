@@ -2,14 +2,15 @@ import styles from './Pagination.module.scss';
 
 interface PaginationProps {
   currentPage: number;
-  totalItems: number;
-  pageSize: number;
+  // totalItems: number;
+  pages: number;
+  // pageSize: number;
   maxPageCells: number;
   onPageChange: (page: number) => void;
 }
 
-function Pagination({ currentPage, totalItems, pageSize, maxPageCells, onPageChange }: PaginationProps) {
-  const totalPages = Math.ceil(totalItems / pageSize);
+function Pagination({ currentPage, pages, maxPageCells, onPageChange }: PaginationProps) {
+  const totalPages = pages;
 
   const getPageNumbers = () => {
     const pages = [];

@@ -3,7 +3,7 @@ import logoImg from '/img/logo.webp';
 import styles from './Header.module.scss';
 
 interface HeaderProps {
-  children: JSX.Element;
+  children?: JSX.Element;
 }
 
 function Header({ children }: HeaderProps) {
