@@ -6,8 +6,8 @@
   border-radius: 10px;
   border: 2px solid $card-border;
   border-style: outset;
-  min-height: 520px;
-  max-height: 520px;
+  min-height: 370px;
+  max-height: 370px;
   padding: 2px;
   background-color: $card-back;
   transition: background-color 0.2s ease-out;
@@ -22,39 +22,13 @@
 }
 
 .card-content {
-  padding: 5px 20px 20px;
-  color: $card-text;
+  padding: 5px 20px;
 }
 
 .title {
   text-transform: uppercase;
   letter-spacing: 2px;
   color: $card-title;
-}
-
-.subtitle {
-  margin: 12px 0;
-  font-size: 1.2rem;
-}
-
-.card-attribute {
-  margin: 8px 0;
-}
-
-.attribute-name {
-  margin-right: 8px;
-  text-transform: capitalize;
-}
-
-.card-stat {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px dotted $card-border;
-  margin-bottom: 5px;
-
-  & span:last-child {
-    text-align: end;
-  }
 }
 
 .img {

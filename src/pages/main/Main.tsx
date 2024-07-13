@@ -1,15 +1,15 @@
 import Content from '@/components/Content/Content';
 import Header from '@/components/Header/Header';
 import SearchInput from '@/components/SearchInput/SearchInput';
-import { getPokemons } from '@/services/characters.service';
-import { Characters } from '@/types';
+import { getCharacters } from '@/services/characters.service';
+import { Character } from '@/types';
 import { useEffect, useState } from 'react';
 import styles from './Main.module.scss';
 import { Outlet, useSearchParams } from 'react-router-dom';
 import Pagination from '@/components/Pagination/Pagination';
 
 function Main() {
-  const [persons, setPersons] = useState<Characters[]>([]);
+  const [persons, setPersons] = useState<Character[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showEmptyRespNotification, setShowEmptyRespNotification] = useState(false);
 
@@ -17,16 +17,18 @@ function Main() {
   const [total, setTotal] = useState(0);
   const [pages, setPages] = useState(0);
 
+  const detailsParam = searchParams.get('details');
+
   useEffect(() => {
     setSearchParams({ page: searchParams.get('page') || '1' });
 
-    fetchPokemons(localStorage.getItem('searchString') ?? '', searchParams.get('page') || '1');
+    fetchCharacters(localStorage.getItem('searchString') ?? '', searchParams.get('page') || '1');
   }, []);
 
-  const fetchPokemons = async (searchString: string = '', page: string): Promise<void> => {
+  const fetchCharacters = (searchString: string = '', page: string): Promise<void> => {
     setIsLoading(true);
     setShowEmptyRespNotification(true);
-    getPokemons(searchString, page)
+    return getCharacters(searchString, page)
       .then((fetchedData) => {
         setPersons(fetchedData.results);
         setShowEmptyRespNotification(!fetchedData.results.length);
@@ -41,6 +43,7 @@ function Main() {
         setIsLoading(false);
       });
   };
+
   return (
     <>
       <Header>
@@ -48,7 +51,7 @@ function Main() {
           isSearchDisabled={isLoading}
           onSearchClick={(searchString) => {
             setSearchParams({ page: '1' });
-            fetchPokemons(searchString, '1');
+            fetchCharacters(searchString, '1');
           }}
         />
       </Header>
@@ -58,24 +61,22 @@ function Main() {
           persons={persons}
           isLoading={isLoading}
           onCardSelect={(card) => {
-            console.log(card);
+            setSearchParams({ page: searchParams.get('page') || '1', details: String(card) });
           }}
         >
           {total ? (
             <Pagination
               currentPage={+(searchParams.get('page') || '1')}
-              // totalItems={total}
               pages={pages}
-              // pageSize={PAGE_SIZE}
               maxPageCells={3}
               onPageChange={(page) => {
                 setSearchParams({ page: String(page) });
-                fetchPokemons(localStorage.getItem('searchString') ?? '', String(page));
+                fetchCharacters(localStorage.getItem('searchString') ?? '', String(page));
               }}
             />
           ) : undefined}
         </Content>
-        <Outlet />
+        {detailsParam && <Outlet />}
       </div>
     </>
   );

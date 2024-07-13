@@ -2,9 +2,7 @@ import styles from './Pagination.module.scss';
 
 interface PaginationProps {
   currentPage: number;
-  // totalItems: number;
   pages: number;
-  // pageSize: number;
   maxPageCells: number;
   onPageChange: (page: number) => void;
 }

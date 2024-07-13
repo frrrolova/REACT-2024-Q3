@@ -1,13 +1,13 @@
 import styles from './Card.module.scss';
-import { Characters } from '@/types';
+import { Character } from '@/types';
 
 interface CardProps {
-  person: Characters;
+  person: Character;
   onCardClick: (card: number) => void;
 }
 
 function Card({ person, onCardClick }: CardProps) {
-  const { name, image, species, gender, type, status } = person;
+  const { name, image } = person;
   return (
     <li
       className={styles.card}
@@ -20,24 +20,6 @@ function Card({ person, onCardClick }: CardProps) {
       </div>
       <div className={styles.cardContent}>
         <h3 className={styles.title}>{name}</h3>
-        <p className={styles.cardStat}>
-          <span className={styles.attributeName}>Species:</span>
-          <span>{species}</span>
-        </p>
-        <p className={styles.cardStat}>
-          <span className={styles.attributeName}>Gender:</span>
-          <span>{gender}</span>
-        </p>
-        {Boolean(type) && (
-          <p className={styles.cardStat}>
-            <span className={styles.attributeName}>Type:</span>
-            <span>{type}</span>
-          </p>
-        )}
-        <p className={styles.cardStat}>
-          <span className={styles.attributeName}>Status:</span>
-          <span>{status}</span>
-        </p>
       </div>
     </li>
   );

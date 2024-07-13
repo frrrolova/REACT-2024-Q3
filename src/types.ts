@@ -6,7 +6,7 @@ export interface PaginatedResponse<T> {
   };
 }
 
-export interface Characters {
+export interface Character {
   id: number;
   name: string;
   image: string;
@@ -14,6 +14,9 @@ export interface Characters {
   gender: string;
   status: string;
   type: string;
+  location: {
+    name: string;
+  };
 }
 
-export type CharactersResponse = PaginatedResponse<Characters>;
+export type CharactersResponse = PaginatedResponse<Character>;

@@ -1,5 +1,14 @@
 @import '@/styles/variables.scss';
 
+.container {
+  position: relative;
+  overflow: hidden;
+
+  &.left {
+    margin-right: calc($details-width + 10px);
+  }
+}
+
 .title {
   display: flex;
   justify-content: center;
@@ -17,11 +26,6 @@
 
 .title-img {
   width: 3rem;
-}
-
-.container {
-  position: relative;
-  overflow: hidden;
 }
 
 .loader-wrapper {

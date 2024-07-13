@@ -1,4 +1,92 @@
+@import '@/styles/variables.scss';
+
 .details {
-  width: 500px;
-  background-color: rgb(176, 174, 174);
+  position: fixed;
+  right: -100%;
+  background: $background-color;
+  height: calc(100vh - $header-height);
+  width: $details-width;
+  min-width: $details-width;
+  padding: 30px 5px;
+  color: $card-text;
+  animation: appear 0.1s linear forwards;
+}
+
+.img {
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: $card-title;
+  font-size: 1.8rem;
+}
+
+.content {
+  padding: 10px;
+}
+
+.subtitle {
+  margin: 12px 0;
+  font-size: 1.2rem;
+}
+
+.card-attribute {
+  margin: 8px 0;
+}
+
+.attribute-name {
+  margin-right: 8px;
+  text-transform: capitalize;
+}
+
+.stat {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dotted $card-border;
+  margin-bottom: 5px;
+
+  & span:last-child {
+    text-align: end;
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in;
+
+  &:hover {
+    background-color: $pagination-hover;
+
+    & > .cross {
+      fill: $btn-grey;
+    }
+  }
+}
+
+.cross {
+  fill: #807f7f;
+  transition: fill 0.15s ease-in;
+}
+
+@keyframes appear {
+  0% {
+    right: -100%;
+  }
+  100% {
+    right: 0;
+  }
 }
