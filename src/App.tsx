@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getPokemons } from './services/pokemon.service';
+import { getPokemons } from './services/characters.service';
 import { Characters } from './types';
 import Header from './components/Header/Header';
 import Content from './components/Content/Content';

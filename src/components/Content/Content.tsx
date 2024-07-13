@@ -3,6 +3,8 @@ import Card from '../Card/Card';
 import styles from './Content.module.scss';
 import titleImg from '/img/title-img.webp';
 import loader from '/img/loader.webp';
+import Pagination from '../Pagination/Pagination';
+import { useState } from 'react';
 
 interface ContentProps {
   showEmptyRespNotification: boolean;
@@ -11,6 +13,7 @@ interface ContentProps {
 }
 
 function Content({ showEmptyRespNotification, persons, isLoading }: ContentProps) {
+  const [currentPage, setCurrentPage] = useState(25);
   return (
     <div>
       <h1 className={styles.title}>
@@ -27,6 +30,15 @@ function Content({ showEmptyRespNotification, persons, isLoading }: ContentProps
           })}
         </ul>
       )}
+      <Pagination
+        currentPage={currentPage}
+        totalItems={1000}
+        pageSize={20}
+        maxPageCells={3}
+        onPageChange={(newPage) => {
+          setCurrentPage(newPage);
+        }}
+      />
     </div>
   );
 }
