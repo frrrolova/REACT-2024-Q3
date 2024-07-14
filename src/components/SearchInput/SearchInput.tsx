@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import styles from './SearchInput.module.scss';
+import { lsKeys } from '@/constants';
 
 interface SearchInputProps {
   onSearchClick: (str: string) => void;
@@ -15,7 +16,7 @@ function SearchInput({ isSearchDisabled, onSearchClick }: SearchInputProps) {
       onSubmit={(e) => {
         e.preventDefault();
         const currentSearchStr = inputRef.current?.value.toLowerCase().trim();
-        localStorage.setItem('searchString', currentSearchStr || '');
+        localStorage.setItem(lsKeys.searchStr, currentSearchStr || '');
         onSearchClick(currentSearchStr || '');
         if (!currentSearchStr && inputRef.current?.value) {
           inputRef.current.value = '';
@@ -23,8 +24,8 @@ function SearchInput({ isSearchDisabled, onSearchClick }: SearchInputProps) {
       }}
     >
       <input
-        defaultValue={localStorage.getItem('searchString') ?? ''}
-        placeholder="Search pokemon"
+        defaultValue={localStorage.getItem(lsKeys.searchStr) ?? ''}
+        placeholder="Search character"
         type="input"
         ref={inputRef}
         className={styles.input}

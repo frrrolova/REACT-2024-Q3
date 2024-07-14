@@ -1,3 +1,7 @@
-// export const baseUrl = 'https://pokeapi.co/api/v2/';
-
 export const baseUrl = 'https://rickandmortyapi.com/api';
+
+export const defaultPage = '2';
+
+export const lsKeys = {
+  searchStr: 'searchString',
+};

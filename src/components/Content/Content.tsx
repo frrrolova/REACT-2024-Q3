@@ -4,6 +4,8 @@ import styles from './Content.module.scss';
 import titleImg from '/img/title-img.webp';
 import loader from '/img/loader.webp';
 import { useSearchParams } from 'react-router-dom';
+import { SearchParams } from '@/enums/searchParams.enum';
+import { contentStringConstants } from './constants';
 
 interface ContentProps {
   showEmptyRespNotification: boolean;
@@ -17,10 +19,10 @@ function Content({ showEmptyRespNotification, persons, isLoading, onCardSelect, 
   const [searchParams] = useSearchParams();
 
   return (
-    <div className={`${styles.container} ${searchParams.get('details') ? styles.left : ''}`}>
+    <div className={`${styles.container} ${searchParams.get(SearchParams.DETAILS) ? styles.left : ''}`}>
       {persons?.length && (
         <h1 className={styles.title}>
-          Results <img className={styles.titleImg} src={titleImg} alt="ball" />
+          {contentStringConstants.title} <img className={styles.titleImg} src={titleImg} alt="img" />
         </h1>
       )}
 
@@ -31,7 +33,7 @@ function Content({ showEmptyRespNotification, persons, isLoading, onCardSelect, 
       )}
 
       <ul className={styles.list}>
-        {showEmptyRespNotification && <div>No results</div>}
+        {showEmptyRespNotification && <div>{contentStringConstants.emptyNotification}</div>}
         {persons.map((person: Character) => {
           if (person.name) {
             return <Card key={`${person.id}`} person={person} onCardClick={onCardSelect} />;

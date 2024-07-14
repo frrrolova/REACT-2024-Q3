@@ -10,17 +10,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url('/img/err-back.jpg');
+  background-image: url('/img/pattern.webp');
   background-repeat: repeat;
 }
 
 .content {
-  padding: 20px;
-  border: 3px solid $btn-grey;
-  border-radius: 7px;
-  border-style: outset;
-  background-color: $background-color;
-  text-align: center;
+  @include contentWrapper;
 }
 
 .title {

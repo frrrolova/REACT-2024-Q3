@@ -4,6 +4,9 @@ import { useSearchParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { Character } from '@/types';
 import loader from '/img/details-loader.webp';
+import { SearchParams } from '@/enums/searchParams.enum';
+import { defaultPage } from '@/constants';
+import { detailsStringConstants } from './constants';
 
 function Details() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -29,7 +32,7 @@ function Details() {
 
   const handleClickOutside = (event: MouseEvent) => {
     if (detailsRef.current && !detailsRef.current.contains(event.target as Node)) {
-      setSearchParams({ page: searchParams.get('page') || '1' });
+      setSearchParams({ page: searchParams.get(SearchParams.PAGE) || defaultPage });
     }
   };
 
@@ -41,7 +44,7 @@ function Details() {
   }, []);
 
   const fetchSingleCharacter = (): Promise<Character> | null => {
-    const id = searchParams.get('details');
+    const id = searchParams.get(SearchParams.DETAILS);
     if (id) {
       return getSingleCharacter(+id);
     }
@@ -54,7 +57,7 @@ function Details() {
       <button
         className={styles.closeBtn}
         onClick={() => {
-          setSearchParams({ page: searchParams.get('page') || '1' });
+          setSearchParams({ page: searchParams.get(SearchParams.PAGE) || defaultPage });
         }}
       >
         <svg
@@ -76,7 +79,7 @@ function Details() {
 
       {isFetchErr && (
         <div className={styles.helperWrapper}>
-          <div>Failed to fetch.</div>
+          <div>{detailsStringConstants.failedFetchMsg}</div>
         </div>
       )}
 

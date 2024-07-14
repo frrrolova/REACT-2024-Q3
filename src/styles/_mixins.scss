@@ -10,8 +10,19 @@
   background-color: $btn-color;
   color: $btn-grey;
   transition: background-color 0.2s ease-out;
+  display: inline-flex;
+  align-items: center;
 }
 
 @mixin btn-hover {
   background-color: lighten($color: $btn-color, $amount: 10%);
+}
+
+@mixin contentWrapper {
+  padding: 20px;
+  border: 3px solid $btn-grey;
+  border-radius: 7px;
+  border-style: outset;
+  background-color: $background-color;
+  text-align: center;
 }

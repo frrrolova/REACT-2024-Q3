@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react';
 import styles from './Main.module.scss';
 import { Outlet, useSearchParams } from 'react-router-dom';
 import Pagination from '@/components/Pagination/Pagination';
+import { defaultPage, lsKeys } from '@/constants';
+import { SearchParams } from '@/enums/searchParams.enum';
 
 function Main() {
   const [persons, setPersons] = useState<Character[]>([]);
@@ -17,12 +19,12 @@ function Main() {
   const [total, setTotal] = useState(0);
   const [pages, setPages] = useState(0);
 
-  const detailsParam = searchParams.get('details');
+  const detailsParam = searchParams.get(SearchParams.DETAILS);
 
   useEffect(() => {
-    setSearchParams({ page: searchParams.get('page') || '1' });
+    setSearchParams({ page: searchParams.get(SearchParams.PAGE) || defaultPage });
 
-    fetchCharacters(localStorage.getItem('searchString') ?? '', searchParams.get('page') || '1');
+    fetchCharacters(localStorage.getItem(lsKeys.searchStr) ?? '', searchParams.get(SearchParams.PAGE) || defaultPage);
   }, []);
 
   const fetchCharacters = (searchString: string = '', page: string): Promise<void> => {
@@ -50,8 +52,8 @@ function Main() {
         <SearchInput
           isSearchDisabled={isLoading}
           onSearchClick={(searchString) => {
-            setSearchParams({ page: '1' });
-            fetchCharacters(searchString, '1');
+            setSearchParams({ page: defaultPage });
+            fetchCharacters(searchString, defaultPage);
           }}
         />
       </Header>
@@ -61,17 +63,17 @@ function Main() {
           persons={persons}
           isLoading={isLoading}
           onCardSelect={(card) => {
-            setSearchParams({ page: searchParams.get('page') || '1', details: String(card) });
+            setSearchParams({ page: searchParams.get(SearchParams.PAGE) || defaultPage, details: String(card) });
           }}
         >
           {total ? (
             <Pagination
-              currentPage={+(searchParams.get('page') || '1')}
+              currentPage={+(searchParams.get(SearchParams.PAGE) || defaultPage)}
               pages={pages}
               maxPageCells={3}
               onPageChange={(page) => {
                 setSearchParams({ page: String(page) });
-                fetchCharacters(localStorage.getItem('searchString') ?? '', String(page));
+                fetchCharacters(localStorage.getItem(lsKeys.searchStr) ?? '', String(page));
               }}
             />
           ) : undefined}
