@@ -10,7 +10,7 @@ vi.mock('react-router-dom', () => ({
   useSearchParams: () => [new URLSearchParams({ page: '1' })],
 }));
 
-describe('Content', () => {
+describe('Card List', () => {
   test('Render current cards quantity if characters find', () => {
     render(
       <Content
