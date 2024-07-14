@@ -1,46 +1,47 @@
-import React from 'react';
-import { Pokemon } from '@/types';
+import { Character } from '@/types';
 import Card from '../Card/Card';
 import styles from './Content.module.scss';
-import ballImg from '/img/pokeball.webp';
-import loader from '/img/poke-loader.png';
+import titleImg from '/img/title-img.webp';
+import loader from '/img/loader.webp';
+import { useSearchParams } from 'react-router-dom';
+import { SearchParams } from '@/enums/searchParams.enum';
+import { contentStringConstants } from './constants';
 
 interface ContentProps {
   showEmptyRespNotification: boolean;
-  pokemons: Pokemon[];
+  persons: Character[];
   isLoading: boolean;
+  onCardSelect: (card: number) => void;
+  children?: JSX.Element;
 }
 
-class Content extends React.Component<ContentProps> {
-  constructor(props: ContentProps) {
-    super(props);
-  }
+function Content({ showEmptyRespNotification, persons, isLoading, onCardSelect, children }: ContentProps) {
+  const [searchParams] = useSearchParams();
 
-  render(): React.ReactNode {
-    return (
-      <div>
-        <h1 className={styles.title}>
-          Results <img className={styles.titleImg} src={ballImg} alt="ball" />
-        </h1>
-        {this.props.isLoading && <img className={styles.loader} src={loader} alt="loader" />}
-        {!this.props.isLoading && (
-          <ul className={styles.list}>
-            {this.props.showEmptyRespNotification && <div>No results</div>}
-            {this.props.pokemons.map((pokemon: Pokemon) => (
-              <Card
-                key={pokemon.name}
-                imgPath={pokemon.sprites.other['official-artwork'].front_default}
-                name={pokemon.name}
-                weight={pokemon.weight}
-                height={pokemon.height}
-                stats={pokemon.stats}
-              />
-            ))}
-          </ul>
-        )}
-      </div>
-    );
-  }
+  return (
+    <div className={`${styles.container} ${searchParams.get(SearchParams.DETAILS) ? styles.left : ''}`}>
+      <h1 className={styles.title}>
+        {contentStringConstants.title} <img className={styles.titleImg} src={titleImg} alt="img" />
+      </h1>
+
+      {isLoading && (
+        <div className={styles.loaderWrapper}>
+          <img className={styles.loader} src={loader} alt="loader" />
+        </div>
+      )}
+
+      <ul className={styles.list} data-testid="cards-list">
+        {showEmptyRespNotification && <div className={styles.empty}>{contentStringConstants.emptyNotification}</div>}
+        {persons.map((person: Character) => {
+          if (person.name) {
+            return <Card key={`${person.id}`} person={person} onCardClick={onCardSelect} />;
+          }
+        })}
+      </ul>
+
+      {children}
+    </div>
+  );
 }
 
 export default Content;

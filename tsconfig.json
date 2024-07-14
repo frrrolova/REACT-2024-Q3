@@ -1,4 +1,3 @@
-
 {
   "compilerOptions": {
     "target": "ES2020",
@@ -7,6 +6,7 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "noImplicitAny": true,
+    "types": ["vitest/globals", "vitest/jsdom", "@testing-library/jest-dom"],
 
     /* Bundler mode */
     "moduleResolution": "Node",
@@ -24,7 +24,7 @@
     "noFallthroughCasesInSwitch": true,
 
     "paths": {
-      "@/*": ["./src/*"],
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src"],

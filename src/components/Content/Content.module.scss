@@ -1,11 +1,22 @@
 @import '@/styles/variables.scss';
 
+.container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+
+  &.left {
+    margin-right: calc($details-width + 10px);
+  }
+}
+
 .title {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 12px;
   color: $title-color;
+  text-align: center;
 }
 
 .list {
@@ -13,18 +24,28 @@
   justify-content: center;
   gap: 30px;
   flex-wrap: wrap;
+  padding: 0 15px;
 }
 
 .title-img {
   width: 3rem;
 }
 
+.loader-wrapper {
+  opacity: 0.8;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  min-height: 150px;
+  background-color: #ffffff;
+}
+
 .loader {
   animation: loader 0.8s linear infinite;
   transform: rotate(0) scale(1);
-  height: 100px;
+  height: 130px;
   margin: 0 auto;
-  width: 100px;
+  width: 200px;
   display: block;
   margin-top: 125px;
 }
@@ -36,4 +57,9 @@
   100% {
     transform: scale(1) rotate(360deg);
   }
+}
+
+.empty {
+  margin-top: 30px;
+  color: $btn-grey;
 }

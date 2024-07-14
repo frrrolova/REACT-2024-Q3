@@ -1,51 +1,32 @@
-import React from 'react';
 import styles from './Card.module.scss';
-import { StatItem } from '@/types';
+import { Character } from '@/types';
 
 interface CardProps {
-  imgPath: string;
-  name: string;
-  weight: number;
-  height: number;
-  stats: StatItem[];
+  person: Character;
+  onCardClick: (card: number) => void;
 }
 
-class Card extends React.Component<CardProps> {
-  constructor(props: CardProps) {
-    super(props);
-  }
-
-  render(): React.ReactNode {
-    return (
-      <li className={styles.card}>
-        <div className={styles.img}>
-          <img src={this.props.imgPath} alt={this.props.name} />
-        </div>
-        <div className={styles.cardContent}>
-          <h3 className={styles.title}>{this.props.name}</h3>
-          <p className={styles.cardAttribute}>
-            <span className={styles.attributeName}>Weight:</span>
-            <span>{this.props.weight}</span>
-          </p>
-          <p className={styles.cardAttribute}>
-            <span className={styles.attributeName}>Height:</span>
-            <span>{this.props.height}</span>
-          </p>
-          <div>
-            <h4 className={styles.subtitle}>Stats</h4>
-            {this.props.stats.map((stat) => {
-              return (
-                <p className={styles.cardStat} key={stat.stat.name}>
-                  <span className={styles.attributeName}>{`${stat.stat.name}:`}</span>
-                  <span>{stat.base_stat}</span>
-                </p>
-              );
-            })}
-          </div>
-        </div>
-      </li>
-    );
-  }
+function Card({ person, onCardClick }: CardProps) {
+  const { name, image } = person;
+  return (
+    <li
+      className={styles.card}
+      onClick={() => {
+        onCardClick(person.id);
+      }}
+      role="person-card"
+      data-testid={`person-card${person.id}`}
+    >
+      <div className={styles.img}>
+        <img src={image} alt={name} />
+      </div>
+      <div className={styles.cardContent}>
+        <h3 className={styles.title} data-testid="card-title">
+          {name}
+        </h3>
+      </div>
+    </li>
+  );
 }
 
 export default Card;

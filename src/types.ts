@@ -1,19 +1,22 @@
-export interface Pokemon {
-  name: string;
-  height: number;
-  weight: number;
-  sprites: {
-    front_default: string;
-    other: {
-      'official-artwork': {
-        front_default: string;
-      };
-    };
+export interface PaginatedResponse<T> {
+  results: T[];
+  info: {
+    pages: number;
+    count: number;
   };
-  stats: StatItem[];
 }
 
-export interface StatItem {
-  base_stat: number;
-  stat: { name: string };
+export interface Character {
+  id: number;
+  name: string;
+  image: string;
+  species: string;
+  gender: string;
+  status: string;
+  type: string;
+  location: {
+    name: string;
+  };
 }
+
+export type CharactersResponse = PaginatedResponse<Character>;
