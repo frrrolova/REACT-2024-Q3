@@ -32,7 +32,7 @@ function Content({ showEmptyRespNotification, persons, isLoading, onCardSelect, 
         </div>
       )}
 
-      <ul className={styles.list}>
+      <ul className={styles.list} data-testid="cards-list">
         {showEmptyRespNotification && <div>{contentStringConstants.emptyNotification}</div>}
         {persons.map((person: Character) => {
           if (person.name) {

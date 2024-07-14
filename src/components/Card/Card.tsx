@@ -14,12 +14,16 @@ function Card({ person, onCardClick }: CardProps) {
       onClick={() => {
         onCardClick(person.id);
       }}
+      role="person-card"
+      data-testid={`person-card${person.id}`}
     >
       <div className={styles.img}>
         <img src={image} alt={name} />
       </div>
       <div className={styles.cardContent}>
-        <h3 className={styles.title}>{name}</h3>
+        <h3 className={styles.title} data-testid="card-title">
+          {name}
+        </h3>
       </div>
     </li>
   );

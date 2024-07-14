@@ -22,6 +22,7 @@ function ErrorPage() {
             onClick={() => {
               navigate(routes.home);
             }}
+            data-testid="err-homeBtn"
           >
             Home
           </button>

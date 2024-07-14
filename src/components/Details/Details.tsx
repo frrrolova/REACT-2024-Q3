@@ -45,6 +45,7 @@ function Details() {
 
   const fetchSingleCharacter = (): Promise<Character> | null => {
     const id = searchParams.get(SearchParams.DETAILS);
+
     if (id) {
       return getSingleCharacter(+id);
     }
@@ -53,12 +54,13 @@ function Details() {
   };
 
   return (
-    <div className={styles.details} ref={detailsRef}>
+    <div className={styles.details} ref={detailsRef} data-testid="details">
       <button
         className={styles.closeBtn}
         onClick={() => {
           setSearchParams({ page: searchParams.get(SearchParams.PAGE) || defaultPage });
         }}
+        data-testid="details-close"
       >
         <svg
           height="32px"
@@ -72,7 +74,7 @@ function Details() {
       </button>
 
       {isLoading && (
-        <div className={styles.helperWrapper}>
+        <div className={styles.helperWrapper} data-testid="details-loader">
           <img className={styles.loader} src={loader} alt="loader" />
         </div>
       )}
@@ -89,30 +91,32 @@ function Details() {
             <img src={person.image} alt={person.name} />
           </div>
           <div className={styles.content}>
-            <h3 className={styles.title}>{person.name}</h3>
+            <h3 className={styles.title} data-testid="details-title">
+              {person.name}
+            </h3>
             <p className={styles.stat}>
               <span className={styles.attributeName}>Species:</span>
-              <span>{person.species}</span>
+              <span data-testid="details-species">{person.species}</span>
             </p>
             <p className={styles.stat}>
               <span className={styles.attributeName}>Gender:</span>
-              <span>{person.gender}</span>
+              <span data-testid="details-gender">{person.gender}</span>
             </p>
             {Boolean(person.type) && (
               <p className={styles.stat}>
                 <span className={styles.attributeName}>Type:</span>
-                <span>{person.type}</span>
+                <span data-testid="details-type">{person.type}</span>
               </p>
             )}
             {Boolean(person.location.name) && (
               <p className={styles.stat}>
                 <span className={styles.attributeName}>Location:</span>
-                <span>{person.location.name}</span>
+                <span data-testid="details-location">{person.location.name}</span>
               </p>
             )}
             <p className={styles.stat}>
               <span className={styles.attributeName}>Status:</span>
-              <span>{person.status}</span>
+              <span data-testid="details-status">{person.status}</span>
             </p>
           </div>
         </div>

@@ -54,7 +54,12 @@ function Pagination({ currentPage, pages, maxPageCells, onPageChange }: Paginati
   return (
     <div className={styles.wrapper}>
       <div className={styles.paginationList}>
-        <button onClick={() => handleClick(currentPage - 1)} disabled={currentPage === 1} className={styles.page}>
+        <button
+          onClick={() => handleClick(currentPage - 1)}
+          disabled={currentPage === 1}
+          className={styles.page}
+          role="page-change"
+        >
           <svg aria-hidden="true" viewBox="0 0 24 24" data-testid="NavigateBeforeIcon" className={styles.arrow}>
             <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
           </svg>
@@ -65,6 +70,8 @@ function Pagination({ currentPage, pages, maxPageCells, onPageChange }: Paginati
               key={index}
               onClick={() => handleClick(page)}
               className={`${styles.page} ${page === currentPage ? styles.active : ''}`}
+              role="page-change"
+              data-testid={`pagination-btn${index}`}
             >
               {page}
             </button>
@@ -76,6 +83,7 @@ function Pagination({ currentPage, pages, maxPageCells, onPageChange }: Paginati
           onClick={() => handleClick(currentPage + 1)}
           disabled={currentPage === totalPages}
           className={styles.page}
+          role="page-change"
         >
           <svg aria-hidden="true" viewBox="0 0 24 24" data-testid="NavigateNextIcon" className={styles.arrow}>
             <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>

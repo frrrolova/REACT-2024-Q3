@@ -29,8 +29,9 @@ function SearchInput({ isSearchDisabled, onSearchClick }: SearchInputProps) {
         type="input"
         ref={inputRef}
         className={styles.input}
+        data-testid="search-input"
       />
-      <button disabled={isSearchDisabled} type="submit" className={styles.btn}>
+      <button disabled={isSearchDisabled} type="submit" className={styles.btn} data-testid="search-btn">
         Search
       </button>
     </form>
