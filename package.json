@@ -12,7 +12,7 @@
     "prepare": "husky",
     "prettier:check": "npx prettier ./src",
     "format:fix": "prettier --write --ignore-unknown ./src",
-    "test": "vitest",
+    "test": "vitest run",
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
