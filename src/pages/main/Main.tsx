@@ -9,11 +9,13 @@ import { Outlet, useSearchParams } from 'react-router-dom';
 import Pagination from '@/components/Pagination/Pagination';
 import { defaultPage, lsKeys } from '@/constants';
 import { SearchParams } from '@/enums/searchParams.enum';
+import { useLS } from '@/hooks/useLS';
 
 function Main() {
   const [persons, setPersons] = useState<Character[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showEmptyRespNotification, setShowEmptyRespNotification] = useState(false);
+  const [searchString] = useLS(lsKeys.searchStr);
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [total, setTotal] = useState(0);
@@ -24,7 +26,7 @@ function Main() {
   useEffect(() => {
     setSearchParams({ page: searchParams.get(SearchParams.PAGE) || defaultPage });
 
-    fetchCharacters(localStorage.getItem(lsKeys.searchStr) ?? '', searchParams.get(SearchParams.PAGE) || defaultPage);
+    fetchCharacters(searchString ?? '', searchParams.get(SearchParams.PAGE) || defaultPage);
   }, []);
 
   const fetchCharacters = (searchString: string = '', page: string): Promise<void> => {
@@ -39,6 +41,7 @@ function Main() {
       })
       .catch(() => {
         setPersons([]);
+        setTotal(0);
         setShowEmptyRespNotification(true);
       })
       .finally(() => {
@@ -73,7 +76,7 @@ function Main() {
               maxPageCells={3}
               onPageChange={(page) => {
                 setSearchParams({ page: String(page) });
-                fetchCharacters(localStorage.getItem(lsKeys.searchStr) ?? '', String(page));
+                fetchCharacters(searchString ?? '', String(page));
               }}
             />
           ) : undefined}

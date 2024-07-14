@@ -20,11 +20,9 @@ function Content({ showEmptyRespNotification, persons, isLoading, onCardSelect, 
 
   return (
     <div className={`${styles.container} ${searchParams.get(SearchParams.DETAILS) ? styles.left : ''}`}>
-      {persons?.length && (
-        <h1 className={styles.title}>
-          {contentStringConstants.title} <img className={styles.titleImg} src={titleImg} alt="img" />
-        </h1>
-      )}
+      <h1 className={styles.title}>
+        {contentStringConstants.title} <img className={styles.titleImg} src={titleImg} alt="img" />
+      </h1>
 
       {isLoading && (
         <div className={styles.loaderWrapper}>
@@ -33,7 +31,7 @@ function Content({ showEmptyRespNotification, persons, isLoading, onCardSelect, 
       )}
 
       <ul className={styles.list} data-testid="cards-list">
-        {showEmptyRespNotification && <div>{contentStringConstants.emptyNotification}</div>}
+        {showEmptyRespNotification && <div className={styles.empty}>{contentStringConstants.emptyNotification}</div>}
         {persons.map((person: Character) => {
           if (person.name) {
             return <Card key={`${person.id}`} person={person} onCardClick={onCardSelect} />;

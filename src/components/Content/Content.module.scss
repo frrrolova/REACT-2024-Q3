@@ -3,6 +3,7 @@
 .container {
   position: relative;
   overflow: hidden;
+  width: 100%;
 
   &.left {
     margin-right: calc($details-width + 10px);
@@ -15,6 +16,7 @@
   align-items: center;
   gap: 12px;
   color: $title-color;
+  text-align: center;
 }
 
 .list {
@@ -54,4 +56,9 @@
   100% {
     transform: scale(1) rotate(360deg);
   }
+}
+
+.empty {
+  margin-top: 30px;
+  color: $btn-grey;
 }
