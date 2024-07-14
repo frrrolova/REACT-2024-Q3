@@ -10,7 +10,7 @@ vi.mock('@/services/characters.service', () => {
   };
 });
 
-describe('Main', () => {
+describe('Card', () => {
   test('clicking on a card opens a detailed card component', async () => {
     const { getByTestId } = render(<RouterProvider router={createMemoryRouter(routeObjects)} />);
     await waitFor(() => {
@@ -33,7 +33,9 @@ describe('Main', () => {
 
     expect(getSingleCharacterMock).toHaveBeenCalled();
   });
+});
 
+describe('Details', () => {
   test('clicking the close button hides details', async () => {
     const { getByTestId } = render(<RouterProvider router={createMemoryRouter(routeObjects)} />);
 
@@ -52,7 +54,9 @@ describe('Main', () => {
       expect(queryByTestId(global.window.document.body, 'details')).not.toBeInTheDocument();
     });
   });
+});
 
+describe('Pagination', () => {
   test('Pagination updates URL query parameter when page changes', async () => {
     const { getByTestId } = render(<RouterProvider router={createBrowserRouter(routeObjects)} />);
     await waitFor(() => {
