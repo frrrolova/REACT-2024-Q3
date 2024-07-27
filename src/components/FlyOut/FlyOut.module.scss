@@ -1,0 +1,15 @@
+.flyOut {
+  position: fixed;
+  width: 100vw;
+  bottom: 0;
+  height: 50px;
+  background: red;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & button {
+    margin: 0 10px;
+  }
+}

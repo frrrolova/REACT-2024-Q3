@@ -1,4 +1,4 @@
-import { getSingleCharacter } from '@/services/characters.service';
+// import { getSingleCharacter } from '@/services/characters.service';
 import styles from './Details.module.scss';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';

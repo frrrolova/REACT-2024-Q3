@@ -2,16 +2,18 @@ import { useRef } from 'react';
 import styles from './SearchInput.module.scss';
 import { lsKeys } from '@/constants';
 import { useLS } from '@/hooks/useLS';
+import { useGetCharactersResultWithLatestParams } from '@/hooks/useGetCharactersResultWithLatestParams';
 
 interface SearchInputProps {
   onSearchClick: (str: string) => void;
   isSearchDisabled: boolean;
 }
 
-function SearchInput({ isSearchDisabled, onSearchClick }: SearchInputProps) {
+function SearchInput({ onSearchClick }: SearchInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const queryState = useGetCharactersResultWithLatestParams();
 
-  const [searchInput, setSearchInput] = useLS(lsKeys.searchStr);
+  const [searchInput] = useLS(lsKeys.searchStr);
 
   return (
     <form
@@ -19,7 +21,6 @@ function SearchInput({ isSearchDisabled, onSearchClick }: SearchInputProps) {
       onSubmit={(e) => {
         e.preventDefault();
         const currentSearchStr = inputRef.current?.value.toLowerCase().trim();
-        setSearchInput(currentSearchStr || '');
         onSearchClick(currentSearchStr || '');
         if (!currentSearchStr && inputRef.current?.value) {
           inputRef.current.value = '';
@@ -34,7 +35,7 @@ function SearchInput({ isSearchDisabled, onSearchClick }: SearchInputProps) {
         className={styles.input}
         data-testid="search-input"
       />
-      <button disabled={isSearchDisabled} type="submit" className={styles.btn} data-testid="search-btn">
+      <button disabled={queryState.isFetching} type="submit" className={styles.btn} data-testid="search-btn">
         Search
       </button>
     </form>

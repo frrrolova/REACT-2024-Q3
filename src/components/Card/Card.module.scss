@@ -21,14 +21,23 @@
   }
 }
 
+.chk {
+  width: 30px;
+  height: 30px;
+}
+
 .card-content {
-  padding: 5px 20px;
+  padding: 5px;
 }
 
 .title {
   text-transform: uppercase;
   letter-spacing: 2px;
   color: $card-title;
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  max-height: 40px;
 }
 
 .img {
