@@ -1,28 +1,28 @@
 @mixin header-item {
   height: $header-btn-height;
   border-radius: 7px;
-  border: 1px solid $btn-grey;
+  border: 1px solid map-get($theme-light, 'btn-grey');
   font-size: 1rem;
 }
 
 @mixin btn {
   cursor: pointer;
-  background-color: $btn-color;
-  color: $btn-grey;
+  background-color: map-get($theme-light, 'btn-color');
+  color: map-get($theme-light, 'btn-grey');
   transition: background-color 0.2s ease-out;
   display: inline-flex;
   align-items: center;
 }
 
 @mixin btn-hover {
-  background-color: lighten($color: $btn-color, $amount: 10%);
+  background-color: lighten($color: map-get($theme-light, 'btn-color'), $amount: 10%);
 }
 
 @mixin contentWrapper {
   padding: 20px;
-  border: 3px solid $btn-grey;
+  border: 3px solid map-get($theme-light, 'btn-grey');
   border-radius: 7px;
   border-style: outset;
-  background-color: $background-color;
+  background-color: map-get($theme-light, 'background-color');
   text-align: center;
 }

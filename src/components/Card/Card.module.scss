@@ -4,31 +4,60 @@
   box-sizing: border-box;
   width: $card-width;
   border-radius: 10px;
-  border: 2px solid $card-border;
+  border: 2px solid map-get($theme-light, 'card-border');
   border-style: outset;
   min-height: 370px;
   max-height: 370px;
   padding: 2px;
-  background-color: $card-back;
+  background-color: map-get($theme-light, 'card-back');
   transition: background-color 0.2s ease-out;
   cursor: pointer;
 
+  display: flex;
+  flex-direction: column;
+
+  [data-theme='dark'] & {
+    background-color: map-get($theme-dark, 'card-back');
+  }
+
   &:hover {
-    background-color: #ffffff;
+    background-color: map-get($theme-light, 'card-back-hover');
+
+    [data-theme='dark'] & {
+      background-color: map-get($theme-dark, 'card-back-hover');
+    }
+
     & img {
       transform: scale(1.03);
     }
   }
 }
 
+.chk {
+  width: 30px;
+  height: 30px;
+}
+
 .card-content {
-  padding: 5px 20px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
 }
 
 .title {
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: $card-title;
+  color: map-get($theme-light, 'card-title');
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  max-height: 40px;
+
+  [data-theme='dark'] & {
+    color: map-get($theme-dark, 'card-title');
+  }
 }
 
 .img {

@@ -18,6 +18,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  path {
+    [data-theme='dark'] & {
+      stroke: #9d9d9d;
+      fill: #9d9d9d;
+    }
+  }
 }
 
 .page {
@@ -29,17 +36,21 @@
   border: none;
   border-radius: 9999px;
   background: transparent;
-  color: $btn-grey;
+  color: map-get($theme-light, 'btn-grey');
   font-size: inherit;
   cursor: pointer;
   transition: background-color 0.15s ease-in;
 
+  [data-theme='dark'] & {
+    color: map-get($theme-dark, 'btn-grey');
+  }
+
   &:hover {
-    background-color: $pagination-hover;
+    background-color: map-get($theme-light, 'pagination-hover');
   }
 
   &:active {
-    background-color: $pagination-hover;
+    background-color: map-get($theme-light, 'pagination-hover');
   }
 
   &:disabled {
@@ -50,5 +61,5 @@
 }
 
 .page.active {
-  background-color: $pagination-hover;
+  background-color: map-get($theme-light, 'pagination-hover');
 }

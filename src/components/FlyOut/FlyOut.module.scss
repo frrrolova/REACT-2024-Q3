@@ -1,0 +1,51 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+
+.fly-out {
+  position: fixed;
+  width: 100vw;
+  bottom: 0;
+  height: 80px;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  [data-theme='light'] & {
+    background: map-get($theme-light, 'flyout-background');
+  }
+
+  [data-theme='dark'] & {
+    background: map-get($theme-dark, 'flyout-background');
+  }
+
+  & button {
+    margin: 0 10px;
+    @include btn;
+    height: 40px;
+    border-radius: 7px;
+
+    &:hover {
+      @include btn-hover;
+    }
+  }
+}
+
+.inner-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.counter {
+  text-align: center;
+  margin-bottom: 5px;
+
+  [data-theme='dark'] & {
+    color: map-get($theme-dark, 'card-text');
+  }
+
+  [data-theme='light'] & {
+    color: map-get($theme-light, 'btn-grey');
+  }
+}

@@ -1,0 +1,53 @@
+@import '@/styles/variables.scss';
+
+.wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  font-size: 13px;
+  cursor: pointer;
+  color: map-get($theme-light, 'card-text');
+
+  [data-theme='dark'] & {
+    color: map-get($theme-dark, 'card-text');
+  }
+}
+
+.switcher-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  position: relative;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 9999px;
+  background-color: map-get($theme-light, 'btn-color');
+  box-sizing: border-box;
+  border: 1px solid black;
+  position: absolute;
+  top: -5px;
+  transition: left 0.1s ease-out;
+
+  [data-theme='light'] & {
+    left: 3px;
+  }
+
+  [data-theme='dark'] & {
+    left: calc(100% - 33px);
+  }
+}
+
+.trail {
+  width: 50px;
+  height: 20px;
+  background-color: map-get($theme-light, 'card-border');
+  border-radius: 9999px;
+}
+
+#invisible-theme-switcher {
+  display: none;
+}

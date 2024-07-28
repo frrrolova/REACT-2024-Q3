@@ -31,7 +31,7 @@
 
 .text {
   font-size: 1.4rem;
-  color: $btn-grey;
+  color: map-get($theme-light, 'btn-grey');
   margin-bottom: 16px;
 
   & > p:first-child {

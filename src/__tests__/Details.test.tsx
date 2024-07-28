@@ -1,13 +1,7 @@
-import { fireEvent, render, waitFor } from '@testing-library/react';
-import { characterMock, getPageMock, getSingleCharacterMock } from './test-constants';
+import { fireEvent, waitFor } from '@testing-library/react';
+import { characterMock } from './test-constants';
 import Details from '@/components/Details/Details';
-
-vi.mock('@/services/characters.service', () => {
-  return {
-    getCharacters: vi.fn().mockImplementation(() => getPageMock()),
-    getSingleCharacter: vi.fn().mockImplementation((id: number) => getSingleCharacterMock(id)),
-  };
-});
+import { renderWithProviders } from './utils';
 
 const searchParams = new URLSearchParams({ details: '1' });
 
@@ -23,9 +17,7 @@ vi.mock('react-router-dom', async () => ({
 
 describe('Details', () => {
   test('loading indicator is displayed while fetching data', async () => {
-    const { getByTestId } = render(<Details />);
-
-    expect(getSingleCharacterMock).toHaveBeenCalledWith(1);
+    const { getByTestId } = renderWithProviders(<Details />);
 
     await waitFor(() => {
       expect(getByTestId('details-loader')).toBeInTheDocument();
@@ -33,7 +25,7 @@ describe('Details', () => {
   });
 
   test('correctly displays the detailed card data', async () => {
-    const { getByTestId } = render(<Details />);
+    const { getByTestId } = renderWithProviders(<Details />);
 
     await waitFor(() => {
       const title = getByTestId('details-title');
@@ -53,7 +45,7 @@ describe('Details', () => {
   });
 
   test('clicking the close button correctly changes search params', async () => {
-    const { getByTestId } = render(<Details />);
+    const { getByTestId } = renderWithProviders(<Details />);
 
     const closeBtn = getByTestId('details-close');
 

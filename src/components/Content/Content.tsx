@@ -6,17 +6,18 @@ import loader from '/img/loader.webp';
 import { useSearchParams } from 'react-router-dom';
 import { SearchParams } from '@/enums/searchParams.enum';
 import { contentStringConstants } from './constants';
+import { useGetCharactersResultWithLatestParams } from '@/hooks/useGetCharactersResultWithLatestParams';
 
 interface ContentProps {
   showEmptyRespNotification: boolean;
   persons: Character[];
-  isLoading: boolean;
   onCardSelect: (card: number) => void;
   children?: JSX.Element;
 }
 
-function Content({ showEmptyRespNotification, persons, isLoading, onCardSelect, children }: ContentProps) {
+function Content({ showEmptyRespNotification, persons, onCardSelect, children }: ContentProps) {
   const [searchParams] = useSearchParams();
+  const queryState = useGetCharactersResultWithLatestParams();
 
   return (
     <div className={`${styles.container} ${searchParams.get(SearchParams.DETAILS) ? styles.left : ''}`}>
@@ -24,7 +25,7 @@ function Content({ showEmptyRespNotification, persons, isLoading, onCardSelect, 
         {contentStringConstants.title} <img className={styles.titleImg} src={titleImg} alt="img" />
       </h1>
 
-      {isLoading && (
+      {queryState.isFetching && (
         <div className={styles.loaderWrapper}>
           <img className={styles.loader} src={loader} alt="loader" />
         </div>

@@ -2,14 +2,20 @@
 
 .details {
   position: fixed;
+  overflow: auto;
   right: -100%;
-  background: $background-color;
+  background: map-get($theme-light, 'background-color');
+  color: map-get($theme-light, 'card-text');
   height: calc(100vh - $header-height);
   width: $details-width;
   min-width: $details-width;
-  padding: 30px 5px;
-  color: $card-text;
+  padding: 30px 5px 80px;
   animation: appear 0.15s linear forwards;
+
+  [data-theme='dark'] & {
+    background: map-get($theme-dark, 'background-color');
+    color: map-get($theme-dark, 'card-text');
+  }
 }
 
 .img {
@@ -20,8 +26,12 @@
 .title {
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: $card-title;
+  color: map-get($theme-light, 'card-title');
   font-size: 1.8rem;
+
+  [data-theme='dark'] & {
+    color: map-get($theme-dark, 'card-title');
+  }
 }
 
 .content {
@@ -45,7 +55,7 @@
 .stat {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px dotted $card-border;
+  border-bottom: 1px dotted map-get($theme-light, 'card-border');
   margin-bottom: 5px;
 
   & span:last-child {
@@ -69,17 +79,21 @@
   transition: background-color 0.15s ease-in;
 
   &:hover {
-    background-color: $pagination-hover;
+    background-color: map-get($theme-light, 'pagination-hover');
 
     & > .cross {
-      fill: $btn-grey;
+      fill: map-get($theme-light, 'btn-grey');
     }
   }
 }
 
 .cross {
-  fill: #807f7f;
+  fill: map-get($theme-light, 'close-cross-color');
   transition: fill 0.15s ease-in;
+
+  [data-theme='dark'] & {
+    fill: map-get($theme-dark, 'close-cross-color');
+  }
 }
 
 @keyframes appear {
