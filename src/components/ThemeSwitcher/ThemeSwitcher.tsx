@@ -19,6 +19,7 @@ export default function ThemeSwitcher() {
         className={styles.switcherWrapper}
         htmlFor={styles.invisibleThemeSwitcher}
         data-testid="theme-switcher-label"
+        id="theme-switcher"
       >
         <div className={styles.trail}></div>
         <div className={styles.circle}></div>
