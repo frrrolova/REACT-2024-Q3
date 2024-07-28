@@ -24,9 +24,14 @@ function FlyOut() {
 
   return (
     <div className={styles.flyOut}>
-      <div>
-        <button onClick={handleDownload}>Download</button>
-        <button onClick={handleUnselectAllClick}>Unselect All</button>
+      <div className={styles.innerContainer}>
+        <div className={styles.counter}>
+          {selectedCharacters.length} character{selectedCharacters.length > 1 ? 's' : ''} selected
+        </div>
+        <div>
+          <button onClick={handleDownload}>Download</button>
+          <button onClick={handleUnselectAllClick}>Unselect All</button>
+        </div>
       </div>
     </div>
   );
