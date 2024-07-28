@@ -1,38 +1,23 @@
 // import { getSingleCharacter } from '@/services/characters.service';
 import styles from './Details.module.scss';
 import { useSearchParams } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
-import { Character } from '@/types';
-import loader from '/img/details-loader.webp';
+import { useEffect, useRef } from 'react';
+// import loader from '/img/details-loader.webp';
 import { SearchParams } from '@/enums/searchParams.enum';
 import { defaultPage } from '@/constants';
 import { detailsStringConstants } from './constants';
+import { useGetCharacterByIdQuery } from '@/services/characters.service';
 
 function Details() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [person, setPerson] = useState<Character | null>(null);
-  const [isLoading, setIsloading] = useState(false);
-  const [isFetchErr, setIsFetchErr] = useState(false);
+
+  const { data: character, status, isError } = useGetCharacterByIdQuery(searchParams.get(SearchParams.DETAILS) ?? '');
 
   const detailsRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    setIsloading(true);
-    fetchSingleCharacter()
-      ?.then((resp) => {
-        setPerson(resp);
-      })
-      .catch(() => {
-        setIsFetchErr(true);
-      })
-      .finally(() => {
-        setIsloading(false);
-      });
-  }, []);
-
   const handleClickOutside = (event: MouseEvent) => {
     if (detailsRef.current && !detailsRef.current.contains(event.target as Node)) {
-      setSearchParams({ page: searchParams.get(SearchParams.PAGE) || defaultPage });
+      setSearchParams({ page: searchParams.get(SearchParams.PAGE) || String(defaultPage) });
     }
   };
 
@@ -43,22 +28,12 @@ function Details() {
     };
   }, []);
 
-  const fetchSingleCharacter = (): Promise<Character> | null => {
-    const id = searchParams.get(SearchParams.DETAILS);
-
-    if (id) {
-      return getSingleCharacter(+id);
-    }
-
-    return null;
-  };
-
   return (
     <div className={styles.details} ref={detailsRef} data-testid="details">
       <button
         className={styles.closeBtn}
         onClick={() => {
-          setSearchParams({ page: searchParams.get(SearchParams.PAGE) || defaultPage });
+          setSearchParams({ page: searchParams.get(SearchParams.PAGE) || String(defaultPage) });
         }}
         data-testid="details-close"
       >
@@ -73,50 +48,52 @@ function Details() {
         </svg>
       </button>
 
-      {isLoading && (
+      {status === 'pending' && (
         <div className={styles.helperWrapper} data-testid="details-loader">
-          <img className={styles.loader} src={loader} alt="loader" />
+          <svg className={styles.loader} width="200" height="200" version="2.0">
+            <use href="#rick-head" />
+          </svg>
         </div>
       )}
 
-      {isFetchErr && (
+      {isError && (
         <div className={styles.helperWrapper}>
           <div>{detailsStringConstants.failedFetchMsg}</div>
         </div>
       )}
 
-      {person && (
+      {character && (
         <div>
           <div className={styles.img}>
-            <img src={person.image} alt={person.name} />
+            <img src={character.image} alt={character.name} />
           </div>
           <div className={styles.content}>
             <h3 className={styles.title} data-testid="details-title">
-              {person.name}
+              {character.name}
             </h3>
             <p className={styles.stat}>
               <span className={styles.attributeName}>Species:</span>
-              <span data-testid="details-species">{person.species}</span>
+              <span data-testid="details-species">{character.species}</span>
             </p>
             <p className={styles.stat}>
               <span className={styles.attributeName}>Gender:</span>
-              <span data-testid="details-gender">{person.gender}</span>
+              <span data-testid="details-gender">{character.gender}</span>
             </p>
-            {Boolean(person.type) && (
+            {Boolean(character.type) && (
               <p className={styles.stat}>
                 <span className={styles.attributeName}>Type:</span>
-                <span data-testid="details-type">{person.type}</span>
+                <span data-testid="details-type">{character.type}</span>
               </p>
             )}
-            {Boolean(person.location.name) && (
+            {Boolean(character.location.name) && (
               <p className={styles.stat}>
                 <span className={styles.attributeName}>Location:</span>
-                <span data-testid="details-location">{person.location.name}</span>
+                <span data-testid="details-location">{character.location.name}</span>
               </p>
             )}
             <p className={styles.stat}>
               <span className={styles.attributeName}>Status:</span>
-              <span data-testid="details-status">{person.status}</span>
+              <span data-testid="details-status">{character.status}</span>
             </p>
           </div>
         </div>

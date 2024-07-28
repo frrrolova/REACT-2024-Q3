@@ -2,12 +2,13 @@
 
 .details {
   position: fixed;
+  overflow: auto;
   right: -100%;
   background: $background-color;
   height: calc(100vh - $header-height);
   width: $details-width;
   min-width: $details-width;
-  padding: 30px 5px;
+  padding: 30px 5px 60px;
   color: $card-text;
   animation: appear 0.15s linear forwards;
 }
