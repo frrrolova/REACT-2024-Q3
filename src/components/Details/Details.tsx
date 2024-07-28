@@ -16,7 +16,11 @@ function Details() {
   const detailsRef = useRef<HTMLDivElement>(null);
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (detailsRef.current && !detailsRef.current.contains(event.target as Node)) {
+    if (
+      detailsRef.current &&
+      !detailsRef.current.contains(event.target as Node) &&
+      !(event.target as HTMLInputElement).id.startsWith('character-selector-')
+    ) {
       setSearchParams({ page: searchParams.get(SearchParams.PAGE) || String(defaultPage) });
     }
   };

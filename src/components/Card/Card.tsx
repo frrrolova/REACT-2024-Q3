@@ -48,6 +48,7 @@ function Card({ person, onCardClick }: CardProps) {
           {name}
         </h3>
         <input
+          id={`character-selector-${person.id}`}
           type="checkbox"
           className={styles.chk}
           onClick={(e) => {
