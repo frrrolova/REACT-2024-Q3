@@ -1,0 +1,11 @@
+@import '@/styles/variables.scss';
+
+.main-wrapper {
+  min-height: 100vh;
+
+  background-color: map-get($theme-light, 'background-color');
+
+  &[data-theme='dark'] {
+    background-color: map-get($theme-dark, 'background-color');
+  }
+}

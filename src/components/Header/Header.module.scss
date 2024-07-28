@@ -20,7 +20,7 @@
   }
 
   & ~ div {
-    margin-top: calc($header-height + 10px);
+    padding-top: calc($header-height + 10px);
   }
 }
 

@@ -4,19 +4,21 @@ import { Provider } from 'react-redux';
 import { router } from './routes/Routing';
 import { store } from './store/store';
 import SvgImages from './components/SvgImages/SvgImages';
-import { ThemeProvider } from './providers/theme.provider';
+
+import styles from './App.module.scss';
+import { useTheme } from './hooks/useTheme';
 
 function App() {
+  const { theme } = useTheme();
+
   return (
     <Provider store={store}>
-      <ThemeProvider>
-        <>
-          <SvgImages />
-          <ErrorBoundary>
-            <RouterProvider router={router} />
-          </ErrorBoundary>
-        </>
-      </ThemeProvider>
+      <div className={styles.mainWrapper} data-theme={theme}>
+        <SvgImages />
+        <ErrorBoundary>
+          <RouterProvider router={router} />
+        </ErrorBoundary>
+      </div>
     </Provider>
   );
 }

@@ -1,14 +1,10 @@
 import { useTheme } from '@/hooks/useTheme';
 import styles from './ThemeSwitcher.module.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
   const [checked, setChecked] = useState(theme === 'light');
-
-  useEffect(() => {
-    document.body.dataset.theme = theme;
-  }, [theme]);
 
   return (
     <div className={styles.wrapper}>

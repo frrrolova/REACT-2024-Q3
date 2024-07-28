@@ -13,6 +13,9 @@
   transition: background-color 0.2s ease-out;
   cursor: pointer;
 
+  display: flex;
+  flex-direction: column;
+
   [data-theme='dark'] & {
     background-color: map-get($theme-dark, 'card-back');
   }
@@ -37,6 +40,10 @@
 
 .card-content {
   padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
 }
 
 .title {
