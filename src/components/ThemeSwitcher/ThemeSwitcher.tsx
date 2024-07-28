@@ -15,7 +15,11 @@ export default function ThemeSwitcher() {
       >
         light
       </span>
-      <label className={styles.switcherWrapper} htmlFor={styles.invisibleThemeSwitcher}>
+      <label
+        className={styles.switcherWrapper}
+        htmlFor={styles.invisibleThemeSwitcher}
+        data-testid="theme-switcher-label"
+      >
         <div className={styles.trail}></div>
         <div className={styles.circle}></div>
         <input

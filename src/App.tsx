@@ -13,7 +13,7 @@ function App() {
 
   return (
     <Provider store={store}>
-      <div className={styles.mainWrapper} data-theme={theme}>
+      <div data-testid="main-wrapper-element" className={styles.mainWrapper} data-theme={theme}>
         <SvgImages />
         <ErrorBoundary>
           <RouterProvider router={router} />
