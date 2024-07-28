@@ -12,6 +12,7 @@ import { useLS } from '@/hooks/useLS';
 import { useAppDispatch } from '@/store/store';
 import { setCurrentPage, setSearchString } from '@/store/slices/characters/charactersSlice';
 import FlyOut from '@/components/FlyOut/FlyOut';
+import { useTheme } from '@/hooks/useTheme';
 
 function Main() {
   const dispatch = useAppDispatch();
@@ -21,6 +22,12 @@ function Main() {
 
   const detailsParam = searchParams.get(SearchParams.DETAILS);
   const pageParam = searchParams.get(SearchParams.PAGE);
+
+  const { theme } = useTheme();
+
+  useEffect(() => {
+    document.body.dataset.theme = theme;
+  }, [theme]);
 
   const [trigger, queryStatus] = useLazyGetCharactersQuery();
 
@@ -60,8 +67,8 @@ function Main() {
 
       <div className={styles.sectionsWrapper}>
         <Content
-          showEmptyRespNotification={!queryStatus.data?.results.length}
-          persons={queryStatus.data?.results ?? []}
+          showEmptyRespNotification={queryStatus.isError || !queryStatus.data?.results.length}
+          persons={!queryStatus.isError ? queryStatus.data?.results ?? [] : []}
           onCardSelect={(card) => {
             setSearchParams({
               page: searchParams.get(SearchParams.PAGE) || String(defaultPage),
@@ -69,7 +76,7 @@ function Main() {
             });
           }}
         >
-          {queryStatus.data?.info.count ? (
+          {!queryStatus.isError && queryStatus.data?.info.count ? (
             <Pagination
               currentPage={+(searchParams.get(SearchParams.PAGE) || defaultPage)}
               pages={queryStatus.data.info.pages}
