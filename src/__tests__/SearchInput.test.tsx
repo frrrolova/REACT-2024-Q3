@@ -1,6 +1,7 @@
 import SearchInput from '@/components/SearchInput/SearchInput';
 import { lsKeys } from '@/constants';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
+import { renderWithProviders } from './utils';
 
 vi.spyOn(Storage.prototype, 'setItem');
 Storage.prototype.setItem = vi.fn();
@@ -11,8 +12,10 @@ Storage.prototype.getItem = vi.fn();
 const onSearchClickMock = vi.fn();
 
 describe('SearchInput', () => {
-  test('clicking the Search button saves value to the local storage', () => {
-    const { getByTestId } = render(<SearchInput isSearchDisabled={false} onSearchClick={onSearchClickMock} />);
+  test('clicking the Search button calls the callback', () => {
+    const { getByTestId } = renderWithProviders(
+      <SearchInput isSearchDisabled={false} onSearchClick={onSearchClickMock} />,
+    );
     const searchBtn = getByTestId('search-btn');
     const input = getByTestId('search-input');
 
@@ -20,11 +23,11 @@ describe('SearchInput', () => {
 
     fireEvent.click(searchBtn);
 
-    expect(localStorage.setItem).toHaveBeenCalledWith(lsKeys.searchStr, 'test');
+    expect(onSearchClickMock).toHaveBeenCalledWith('test');
   });
 
   test('retrieves the value from the local storage upon mounting', () => {
-    render(<SearchInput isSearchDisabled={false} onSearchClick={onSearchClickMock} />);
+    renderWithProviders(<SearchInput isSearchDisabled={false} onSearchClick={onSearchClickMock} />);
     expect(localStorage.getItem).toHaveBeenCalledWith(lsKeys.searchStr);
   });
 });

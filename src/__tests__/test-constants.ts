@@ -1,15 +1,15 @@
 import { Character, PaginatedResponse } from '@/types';
 
 export const characterMock: Character = {
-  id: 1,
-  name: 'name',
-  image: 'path',
-  species: 'species',
-  gender: 'gender',
-  status: 'status',
+  id: 3,
+  name: 'Summer Smith',
+  gender: 'Female',
+  image: 'https://rickandmortyapi.com/api/character/avatar/3.jpeg',
+  status: 'Alive',
+  species: 'Human',
   type: 'type',
   location: {
-    name: 'location',
+    name: 'Earth (Replacement Dimension)',
   },
 };
 export const charactersMockWithOneCharacter: Character[] = [characterMock];
@@ -30,7 +30,7 @@ export const pageResponseMock: PaginatedResponse<Character> = {
 export const getPageMock = vi.fn().mockResolvedValue(pageResponseMock);
 export const getSingleCharacterMock = vi.fn().mockResolvedValue(characterMock);
 
-function getManyCharacters(num: number): Character[] {
+export function getManyCharacters(num: number): Character[] {
   const chars = [];
   for (let i = 0; i < num; i += 1) {
     chars.push({ ...characterMock, id: i });

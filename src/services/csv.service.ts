@@ -1,6 +1,6 @@
 import { Character } from '@/types';
 
-export function downloadCsv(characters: Character[]) {
+export function downloadCsv(characters: Character[]): void {
   const csvFormattedCharacters = getCsvFormattedCharacters(characters);
 
   const csvDataBlob = new Blob([csvFormattedCharacters], { type: 'text/csv' });
@@ -15,7 +15,7 @@ export function downloadCsv(characters: Character[]) {
   document.body.removeChild(link);
 }
 
-function getCsvFormattedCharacters(characters: Character[]): string {
+export function getCsvFormattedCharacters(characters: Character[]): string {
   let result = '';
 
   const characterKeys: Array<keyof Character> = ['id', 'name', 'gender', 'image', 'status'];

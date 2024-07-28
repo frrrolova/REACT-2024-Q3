@@ -1,7 +1,8 @@
 import Content from '@/components/Content/Content';
 import { contentStringConstants } from '@/components/Content/constants';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { charactersMockWithMultipleCharacters } from './test-constants';
+import { renderWithProviders } from './utils';
 
 const onCardSelectMock = vi.fn();
 
@@ -12,10 +13,9 @@ vi.mock('react-router-dom', () => ({
 
 describe('Card List', () => {
   test('Render current cards quantity if characters find', () => {
-    render(
+    renderWithProviders(
       <Content
         showEmptyRespNotification={false}
-        isLoading={false}
         onCardSelect={onCardSelectMock}
         persons={charactersMockWithMultipleCharacters}
       >
@@ -27,8 +27,8 @@ describe('Card List', () => {
   });
 
   test('Render empty message cards quantity if no characters', async () => {
-    render(
-      <Content showEmptyRespNotification={true} isLoading={false} onCardSelect={onCardSelectMock} persons={[]}>
+    renderWithProviders(
+      <Content showEmptyRespNotification={true} onCardSelect={onCardSelectMock} persons={[]}>
         <div></div>
       </Content>,
     );
