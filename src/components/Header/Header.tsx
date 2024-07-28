@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import logoImg from '/img/logo.webp';
 import styles from './Header.module.scss';
+import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 
 interface HeaderProps {
   children?: JSX.Element;
@@ -19,7 +20,8 @@ function Header({ children }: HeaderProps) {
         <img src={logoImg} alt="logo" />
       </div>
       {children}
-      <div>
+      <div className={styles.actions}>
+        <ThemeSwitcher />
         <button
           className={styles.errBtn}
           onClick={() => {

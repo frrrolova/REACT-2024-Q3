@@ -12,8 +12,12 @@
   height: $header-height;
   padding: 7px 20px;
   box-sizing: border-box;
-  background-color: fade-out($background-color, 0.1);
+  background-color: fade-out(map-get($theme-light, 'background-color'), 0.1);
   z-index: 1;
+
+  [data-theme='dark'] & {
+    background-color: fade-out(map-get($theme-dark, 'background-color'), 0.1);
+  }
 
   & ~ div {
     margin-top: calc($header-height + 10px);
@@ -29,10 +33,15 @@
 }
 
 .err-btn {
+  margin-left: 20px;
   @include header-item;
   @include btn;
 
   &:hover {
     @include btn-hover;
   }
+}
+
+.actions {
+  display: flex;
 }

@@ -4,18 +4,36 @@ $card-width: 250px;
 $details-width: 500px;
 
 // Colors
-$background-color: #fafafa;
+$theme-light: (
+  'body-background': #fafafa,
+  'background-color': #fafafa,
+  'input-back': #fcfefe,
+  'btn-color': #ffcb03,
+  'btn-grey': #4d4b4b,
+  'card-border': #e1e1e1,
+  'card-back': #f2f2f2,
+  'card-back-hover': #ffffff,
+  'card-text': #605f5f,
+  'card-title': #0078c3,
+  'title-color': #ef4035,
+  'pagination-hover': #e3e1e1,
+  'loader-background': #ffffff,
+  'close-cross-color': #807f7f,
+);
 
-$input-back: #fcfefe;
-
-$btn-color: #ffcb03;
-$btn-grey: #4d4b4b;
-
-$card-border: #e1e1e1;
-$card-back: #f2f2f2;
-$card-text: #605f5f;
-$card-title: #0078c3;
-
-$title-color: #ef4035;
-
-$pagination-hover: #e3e1e1;
+$theme-dark: (
+  'body-background': #4d4d4d,
+  'background-color': #6c6c6c,
+  'input-back': #fcfefe,
+  'btn-color': #ffcb03,
+  'btn-grey': #9d9d9d,
+  'card-border': #e1e1e1,
+  'card-back': #414141,
+  'card-back-hover': #505050,
+  'card-text': #e8e8e8,
+  'card-title': #5dbffc,
+  'title-color': #ef4035,
+  'pagination-hover': #e3e1e1,
+  'loader-background': #7f7f7f,
+  'close-cross-color': #a1a1a1,
+);

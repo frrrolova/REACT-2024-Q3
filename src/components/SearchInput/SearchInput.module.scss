@@ -11,7 +11,7 @@
   outline: none;
   height: 100%;
   padding: 3px 10px;
-  background-color: $input-back;
+  background-color: map-get($theme-light, 'input-back');
   font-size: 1rem;
 }
 
